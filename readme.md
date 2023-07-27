@@ -7,7 +7,7 @@
 
 > lorem
 
-<p align='center'>🚧 O HELPDesktop-Clone 🚀 Em construção... 🚧</p>
+<p align='center'>🚧O HELPDesktop-Clone 🚀 Em construção... 🚧</p>
 
 ## Indices
 ---
@@ -64,7 +64,7 @@
 > Durante a criação desse projecto foram usada bibliotecas e framework que possibitaram e facilitaram
 > o desenvolvimento do HELPDesktop, sendo assim temos a lista:
 
- - [expo](#)
+ - [expo](https://docs.expo.dev/)
  - [react-native](#)
  - [typescript](#)
 

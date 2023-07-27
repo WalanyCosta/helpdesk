@@ -1,10 +1,10 @@
 import React from 'react'
-import { View } from 'react-native'
+import { Container, Paragraph } from './styles'
 
 export function Home () {
   return (
-    <View>
-        Hello, world
-    </View>
+    <Container>
+        <Paragraph>Hello, world</Paragraph>
+    </Container>
   )
 }
