@@ -27,6 +27,9 @@
         "react/prop-types": "off",
         "no-useless-escape": "off",
         "no-useless-constructor": "off",
-        "@typescript-eslint/prefer-nullish-coalescing": "off"
+        "@typescript-eslint/prefer-nullish-coalescing": "off",
+        "@typescript-eslint/no-floating-promises": "off",
+        "@typescript-eslint/no-misused-promises": "off",
+        "@typescript-eslint/consistent-type-imports": "off"
     }
 }
