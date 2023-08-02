@@ -1,8 +1,7 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback } from 'react'
 import { Login } from './src/screen/login'
-import Entypo from '@expo/vector-icons/Entypo'
 import * as SplashScreen from 'expo-splash-screen'
-import * as Font from 'expo-font'
+import { useFonts, Inter_700Bold, Inter_400Regular } from '@expo-google-fonts/inter'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { StatusBar } from 'expo-status-bar'
 import theme from './src/theme'
@@ -11,31 +10,18 @@ import { ThemeProvider } from 'styled-components'
 SplashScreen.preventAutoHideAsync()
 
 export default function App () {
-  const [appIsReady, setAppIsReady] = useState(false)
-
-  useEffect(() => {
-    async function prepare () {
-      try {
-        await Font.loadAsync(Entypo.font)
-        await new Promise(resolve => setTimeout(resolve, 2000))
-      } catch (e) {
-        console.warn(e)
-      } finally {
-        // Tell the application to render
-        setAppIsReady(true)
-      }
-    }
-
-    prepare()
-  }, [])
+  const [fontsLoaded] = useFonts({
+    Inter_700Bold,
+    Inter_400Regular
+  })
 
   const onLayoutRootView = useCallback(async () => {
-    if (appIsReady) {
+    if (fontsLoaded) {
       await SplashScreen.hideAsync()
     }
-  }, [appIsReady])
+  }, [fontsLoaded])
 
-  if (!appIsReady) {
+  if (!fontsLoaded) {
     return null
   }
 
