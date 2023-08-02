@@ -1,19 +1,16 @@
 import React, { useState } from 'react'
 import {
   Container,
-  Input,
   Legend,
   Title,
   Form,
-  Submit,
-  TitleWhite,
-  Footer,
-  FooterButton,
-  Span
+  Footer
 } from './styles'
-import LottieView from 'lottie-react-native'
 import LoginAnimation from '../../assets/signin.json'
-import { MaterialIcons } from '@expo/vector-icons'
+import { Lottie } from '../../components/Animations/Lottie'
+import { Input } from './../../components/forms/Input/index'
+import { Button } from '../../components/forms/Button'
+import { FooterButton } from '../../components/forms/footer-button'
 
 export function Login () {
   const [email, setEmail] = useState('')
@@ -25,41 +22,29 @@ export function Login () {
 
   return (
     <Container>
-         <LottieView
-            style={
-              {
-                width: 220,
-                height: 220,
-                alignSelf: 'center',
-                marginTop: 20
-              }
-            }
-            autoPlay
-            loop
-            autoSize
-            resizeMode="cover"
-            source={LoginAnimation}
-        />
+        <Lottie source={LoginAnimation} />
         <Legend>Lorem ipsum dolor sit amet consectetur.</Legend>
         <Title>Entrar</Title>
         <Form>
           <Input placeholder="E-mail" onChangeText={setEmail}/>
           <Input placeholder="Senha" secureTextEntry onChangeText={setPassword}/>
 
-          <Submit onPress={handleSignIn}>
-            <TitleWhite>Entrar</TitleWhite>
-          </Submit>
+          <Button text='Entrar' onPress={handleSignIn}/>
 
           <Footer>
-            <FooterButton>
-                <MaterialIcons name="person-add" size={24} color="black" />
-                <Span>criar conta</Span>
-            </FooterButton>
+            <FooterButton
+              iconColor='black'
+              iconName='person-add'
+              size={24}
+              text='Criar conta'
+            />
 
-            <FooterButton>
-                <MaterialIcons name="email" size={24} color="black" />
-                <Span>Esqueci a minha senha</Span>
-            </FooterButton>
+            <FooterButton
+              iconColor='black'
+              iconName='email'
+              size={24}
+              text='Esqueci a senha'
+            />
           </Footer>
         </Form>
     </Container>
