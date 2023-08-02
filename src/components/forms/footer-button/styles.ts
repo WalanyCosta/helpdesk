@@ -8,5 +8,6 @@ export const Button = styled.View`
 
 export const Text = styled.Text`
     font-size: 15px;
-    color: ${({ theme }) => theme.COLORS.TEXT}
+    color: ${({ theme }) => theme.COLORS.TEXT};
+    font-family: ${({ theme }) => theme.FONTS.TEXT};
 `

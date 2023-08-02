@@ -7,4 +7,6 @@ export const Container = styled.TextInput`
     padding: 10px;
     border: 1px solid ${({ theme }) => theme.COLORS.BORDER};
     border-radius: 8px;
+    font-size: 15px;
+    font-family: ${({ theme }) => theme.FONTS.TEXT};
 `
