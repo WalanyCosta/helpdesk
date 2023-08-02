@@ -7,10 +7,10 @@ import {
   Footer
 } from './styles'
 import LoginAnimation from '../../assets/signin.json'
-import { Lottie } from '../../components/Animations/Lottie'
-import { Input } from './../../components/forms/Input/index'
-import { Button } from '../../components/forms/Button'
-import { FooterButton } from '../../components/forms/footer-button'
+import { Lottie } from '../../../components/Animations/Lottie'
+import { Input } from '../../../components/forms/Input/index'
+import { Button } from '../../../components/forms/Button'
+import { FooterButton } from '../../../components/forms/footer-button'
 
 export function Login () {
   const [email, setEmail] = useState('')

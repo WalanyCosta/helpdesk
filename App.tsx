@@ -1,10 +1,10 @@
 import React, { useCallback } from 'react'
-import { Login } from './src/screen/login'
+import { Login } from './src/presentation/screen/login'
 import * as SplashScreen from 'expo-splash-screen'
 import { useFonts, Inter_700Bold, Inter_400Regular } from '@expo-google-fonts/inter'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { StatusBar } from 'expo-status-bar'
-import theme from './src/theme'
+import theme from './src/presentation/theme'
 import { ThemeProvider } from 'styled-components'
 
 SplashScreen.preventAutoHideAsync()
