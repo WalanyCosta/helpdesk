@@ -1,5 +1,5 @@
 import { app } from '../config/app'
-import { FirebaseSignIn } from './../../domain/protocols/firebase-signin'
+import { FirebaseSignIn } from '../../../domain/protocols/firebase-signin'
 import { signInWithEmailAndPassword, getAuth } from 'firebase/auth'
 
 export class SignInWithPassword implements FirebaseSignIn {
