@@ -3,10 +3,10 @@ import { ServerError } from '../error/server-error'
 import { UserNotFoundError } from '../error/user-not-found-error'
 import { AccountModel } from '../model/account'
 import { Authentication, AuthenticationParam } from '../protocols/authentication'
-import { FirebaseAuth } from '../protocols/firebase-auth'
+import { FirebaseSignIn } from '../protocols/firebase-signin'
 
 export class FirebaseAuthentication implements Authentication {
-  constructor (private readonly firebaseAuth: FirebaseAuth) { }
+  constructor (private readonly firebaseAuth: FirebaseSignIn) { }
 
   async auth (param: AuthenticationParam): Promise<AccountModel> {
     const response = await this.firebaseAuth.signIn(param.email, param.password)
