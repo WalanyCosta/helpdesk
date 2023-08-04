@@ -4,6 +4,10 @@ import { signInWithEmailAndPassword, getAuth } from 'firebase/auth'
 
 export class SignInWithPassword implements FirebaseSignIn {
   async signIn (email: string, password: string): Promise<any> {
-    return await signInWithEmailAndPassword(getAuth(app), email, password)
+    try {
+      return await signInWithEmailAndPassword(getAuth(app), email, password)
+    } catch (error) {
+      return error.code
+    }
   }
 }
