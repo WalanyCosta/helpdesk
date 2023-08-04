@@ -23,6 +23,8 @@ export class FirebaseAuthentication implements Authentication {
       throw new ServerError()
     }
 
-    return null
+    return {
+      name: 'any_name'
+    }
   }
 }
