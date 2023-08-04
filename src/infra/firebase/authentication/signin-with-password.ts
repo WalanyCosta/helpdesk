@@ -5,9 +5,16 @@ import { signInWithEmailAndPassword, getAuth } from 'firebase/auth'
 export class SignInWithPassword implements FirebaseSignIn {
   async signIn (email: string, password: string): Promise<any> {
     try {
-      return await signInWithEmailAndPassword(getAuth(app), email, password)
+      const response = await signInWithEmailAndPassword(getAuth(app), email, password)
+      console.log(response)
+      return {
+        name: 'any_name'
+      }
     } catch (error) {
-      return error.code
+      console.log(error.code.toString())
+      return {
+        code: error.code
+      }
     }
   }
 }
