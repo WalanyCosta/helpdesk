@@ -19,7 +19,7 @@ export class FirebaseAuthentication implements Authentication {
       throw new InvalidPassword()
     }
 
-    if (response?.code !== '') {
+    if (response?.code) {
       throw new ServerError()
     }
 
