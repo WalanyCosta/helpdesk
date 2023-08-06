@@ -21,12 +21,16 @@ type Props = {
 export function Login ({ authentication }: Props) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [loading, isLoading] = useState(false)
 
   const handleSignIn = async () => {
     try {
+      isLoading(true)
       await authentication.auth({ email, password })
     } catch (error) {
       Alert.alert(error.message)
+    } finally {
+      isLoading(false)
     }
   }
 
@@ -39,7 +43,11 @@ export function Login ({ authentication }: Props) {
           <Input placeholder="E-mail" onChangeText={setEmail}/>
           <Input placeholder="Senha" secureTextEntry onChangeText={setPassword}/>
 
-          <Button text='Entrar' onPress={handleSignIn}/>
+          <Button
+            text='Entrar'
+            loading={loading}
+            onPress={handleSignIn}
+          />
 
           <Footer>
             <FooterButton
