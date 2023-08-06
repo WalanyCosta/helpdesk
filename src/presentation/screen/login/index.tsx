@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   Container,
   Legend,
@@ -13,18 +13,30 @@ import { Button } from '../../components/forms/Button'
 import { FooterButton } from '../../components/forms/footer-button'
 import { Authentication } from '../../../domain/protocols/authentication'
 import { Alert } from 'react-native'
+import { Validator } from '../../protocols/validator'
 
 type Props = {
   authentication: Authentication
+  validator: Validator
 }
 
-export function Login ({ authentication }: Props) {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+export function Login ({ authentication, validator }: Props) {
+  const [email, setEmail] = useState(null)
+  const [password, setPassword] = useState(null)
   const [loading, isLoading] = useState(false)
+  const [validEmail, isValidEmail] = useState(null)
+
+  useEffect(() => {
+    if (email !== null) {
+      isValidEmail(validator.validate('email', email))
+    }
+  }, [email])
 
   const handleSignIn = async () => {
     try {
+      if (validEmail) {
+        return
+      }
       isLoading(true)
       await authentication.auth({ email, password })
     } catch (error) {
@@ -40,8 +52,18 @@ export function Login ({ authentication }: Props) {
         <Legend>Lorem ipsum dolor sit amet consectetur.</Legend>
         <Title>Entrar</Title>
         <Form>
-          <Input placeholder="E-mail" onChangeText={setEmail}/>
-          <Input placeholder="Senha" secureTextEntry onChangeText={setPassword}/>
+          <Input
+            placeholder="E-mail"
+            messageError={validEmail}
+            onChangeText={setEmail}
+          />
+
+          <Input
+           placeholder="Senha"
+           messageError={''}
+           secureTextEntry
+           onChangeText={setPassword}
+          />
 
           <Button
             text='Entrar'
