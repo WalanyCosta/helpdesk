@@ -1,4 +1,4 @@
-import { InvalidPassword } from '../error/invalid-password'
+import { InvalidPasswordError } from '../error/invalid-password-error'
 import { ServerError } from '../error/server-error'
 import { UserNotFoundError } from '../error/user-not-found-error'
 import { AccountModel } from '../model/account'
@@ -16,7 +16,7 @@ export class FirebaseAuthentication implements Authentication {
     }
 
     if (response?.code === 'auth/wrong-password') {
-      throw new InvalidPassword()
+      throw new InvalidPasswordError()
     }
 
     if (response?.code) {
