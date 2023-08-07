@@ -7,10 +7,10 @@ export class ZodValidatior implements Validator {
   constructor () {
     this.validateSchema = z.object({
       email: z.string({ required_error: 'Digite a inteligencia' })
-        .email({ message: 'Email inválido. Por favor passe email correcto' })
+        .email({ message: 'Email inválido. Por favor passe email correcto.' })
         .optional(),
       password: z.string()
-        .min(6, { message: 'A senha deve ter conter pelomenos 6 caracteres' })
+        .min(6, { message: 'A senha deve ter conter pelomenos 6 caracteres.' })
         .optional()
     })
   }

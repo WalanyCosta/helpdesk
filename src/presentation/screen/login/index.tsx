@@ -25,22 +25,33 @@ export function Login ({ authentication, validator }: Props) {
   const [password, setPassword] = useState(null)
   const [loading, isLoading] = useState(false)
   const [validEmail, isValidEmail] = useState(null)
+  const [validPassword, isValidPassword] = useState(null)
 
   useEffect(() => {
     if (email !== null) {
       isValidEmail(validator.validate('email', email))
     }
-  }, [email])
+
+    if (password !== null) {
+      isValidPassword(validator.validate('password', password))
+    }
+  }, [email, password])
 
   const handleSignIn = async () => {
     try {
-      if (validEmail) {
+      if (!!validEmail || !!validPassword) {
         return
       }
       isLoading(true)
       await authentication.auth({ email, password })
     } catch (error) {
-      Alert.alert(error.message)
+      switch (error.name) {
+        case 'UserNotFoundError': isValidEmail(error.message)
+          break
+        case 'InvalidPasswordError': isValidPassword(error.message)
+          break
+        default: Alert.alert(error.message)
+      }
     } finally {
       isLoading(false)
     }
@@ -60,7 +71,7 @@ export function Login ({ authentication, validator }: Props) {
 
           <Input
            placeholder="Senha"
-           messageError={''}
+           messageError={validPassword}
            secureTextEntry
            onChangeText={setPassword}
           />
