@@ -3,7 +3,6 @@ import {
   Container,
   Legend,
   Title,
-  Form,
   Footer
 } from './styles'
 import LoginAnimation from '../../assets/signin.json'
@@ -12,8 +11,9 @@ import { Input } from '../../components/forms/Input/index'
 import { Button } from '../../components/forms/Button'
 import { FooterButton } from '../../components/forms/footer-button'
 import { Authentication } from '../../../domain/protocols/authentication'
-import { Alert } from 'react-native'
+import { Alert, KeyboardAvoidingView } from 'react-native'
 import { Validator } from '../../protocols/validator'
+import { useNavigation } from '@react-navigation/native'
 
 type Props = {
   authentication: Authentication
@@ -26,6 +26,7 @@ export function Login ({ authentication, validator }: Props) {
   const [loading, isLoading] = useState(false)
   const [validEmail, isValidEmail] = useState(null)
   const [validPassword, isValidPassword] = useState(null)
+  const navigation = useNavigation()
 
   useEffect(() => {
     if (email !== null) {
@@ -57,12 +58,16 @@ export function Login ({ authentication, validator }: Props) {
     }
   }
 
+  const handleNavigateToRegisterScreen = (): void => {
+    navigation.navigate('register')
+  }
+
   return (
     <Container>
         <Lottie source={LoginAnimation} />
         <Legend>Lorem ipsum dolor sit amet consectetur.</Legend>
         <Title>Entrar</Title>
-        <Form>
+        <KeyboardAvoidingView behavior='padding'>
           <Input
             placeholder="E-mail"
             messageError={validEmail}
@@ -88,6 +93,7 @@ export function Login ({ authentication, validator }: Props) {
               iconName='person-add'
               size={24}
               text='Criar conta'
+              onPress={handleNavigateToRegisterScreen}
             />
 
             <FooterButton
@@ -97,7 +103,7 @@ export function Login ({ authentication, validator }: Props) {
               text='Esqueci a senha'
             />
           </Footer>
-        </Form>
+        </KeyboardAvoidingView>
     </Container>
   )
 }

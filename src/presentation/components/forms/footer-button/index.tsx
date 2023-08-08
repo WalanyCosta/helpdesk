@@ -2,9 +2,9 @@ import React from 'react'
 
 import { MaterialIcons } from '@expo/vector-icons'
 import { Button, Text } from './styles'
-import { ViewProps } from 'react-native'
+import { TouchableWithoutFeedbackProps } from 'react-native'
 
-type Props = ViewProps & {
+type Props = TouchableWithoutFeedbackProps & {
   iconName: any
   iconColor: string
   text: string
@@ -13,9 +13,9 @@ type Props = ViewProps & {
 
 export function FooterButton ({ iconName, iconColor, size, text, ...rest }: Props) {
   return (
-    <Button {...rest}>
-        <MaterialIcons name={iconName} size={size} color={iconColor} />
-        <Text>{text}</Text>
-    </Button>
+      <Button {...rest} >
+          <MaterialIcons name={iconName} size={size} color={iconColor} />
+          <Text>{text}</Text>
+      </Button>
   )
 }
