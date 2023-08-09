@@ -9,7 +9,7 @@ export const Container = styled.View`
 export const Legend = styled.Text`
     text-align: center;
     color: ${({ theme }) => theme.COLORS.SUBTEXT};
-    margin-bottom: 56px;
+    margin-bottom: 16px;
     font-size: 15px;
     font-family: ${({ theme }) => theme.FONTS.TEXT};
 `

@@ -6,10 +6,10 @@ export function Lottie ({ ...rest }: AnimatedLottieViewProps) {
     <LottieView
             style={
               {
-                width: 220,
-                height: 220,
+                width: 180,
+                height: 180,
                 alignSelf: 'center',
-                marginTop: 20
+                marginTop: 16
               }
             }
             autoPlay
