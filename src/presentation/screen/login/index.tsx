@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {
-  Container,
-  Legend,
-  Title
-} from './styles'
+import { Container } from './styles'
 import LoginAnimation from '../../assets/signin.json'
 import { Lottie } from '../../components/Animations/Lottie'
 import { Input } from '../../components/forms/Input/index'
@@ -12,6 +8,7 @@ import { Authentication } from '../../../domain/protocols/authentication'
 import { Alert, KeyboardAvoidingView } from 'react-native'
 import { Validator } from '../../protocols/validator'
 import { Footer } from './components/footer/footer'
+import { Header } from '../../components/forms/header'
 
 type Props = {
   authentication: Authentication
@@ -60,8 +57,10 @@ export function Login ({ authentication, validator }: Props) {
   return (
     <Container>
         <Lottie source={LoginAnimation} />
-        <Legend>Lorem ipsum dolor sit amet consectetur.</Legend>
-        <Title>Entrar</Title>
+        <Header
+          legend='Lorem ipsum dolor sit amet. Est'
+          title='Entrar'
+        />
         <KeyboardAvoidingView behavior='padding'>
           <Input
             placeholder="E-mail"
@@ -83,7 +82,6 @@ export function Login ({ authentication, validator }: Props) {
           />
 
           <Footer />
-
         </KeyboardAvoidingView>
     </Container>
   )
