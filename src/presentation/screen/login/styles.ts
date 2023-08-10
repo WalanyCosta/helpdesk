@@ -18,10 +18,3 @@ export const Title = styled.Text`
     margin-bottom: 40px;
     font-family: ${({ theme }) => theme.FONTS.TITLE};
 `
-
-export const Footer = styled.View`
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 48px;
-`

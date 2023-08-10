@@ -2,18 +2,16 @@ import React, { useEffect, useState } from 'react'
 import {
   Container,
   Legend,
-  Title,
-  Footer
+  Title
 } from './styles'
 import LoginAnimation from '../../assets/signin.json'
 import { Lottie } from '../../components/Animations/Lottie'
 import { Input } from '../../components/forms/Input/index'
 import { Button } from '../../components/forms/Button'
-import { FooterButton } from '../../components/forms/footer-button'
 import { Authentication } from '../../../domain/protocols/authentication'
 import { Alert, KeyboardAvoidingView } from 'react-native'
 import { Validator } from '../../protocols/validator'
-import { useNavigation } from '@react-navigation/native'
+import { Footer } from './components/footer/footer'
 
 type Props = {
   authentication: Authentication
@@ -21,45 +19,42 @@ type Props = {
 }
 
 export function Login ({ authentication, validator }: Props) {
-  const [email, setEmail] = useState(null)
-  const [password, setPassword] = useState(null)
-  const [loading, isLoading] = useState(false)
-  const [validEmail, isValidEmail] = useState(null)
-  const [validPassword, isValidPassword] = useState(null)
-  const navigation = useNavigation()
+  const [state, setState] = useState({
+    email: null,
+    password: null,
+    loading: false,
+    validEmail: null,
+    validPassword: null
+  })
 
   useEffect(() => {
-    if (email !== null) {
-      isValidEmail(validator.validate('email', email))
+    if (state.email !== null) {
+      setState({ ...state, validEmail: validator.validate('email', state.email) })
     }
 
-    if (password !== null) {
-      isValidPassword(validator.validate('password', password))
+    if (state.password !== null) {
+      setState({ ...state, validPassword: validator.validate('password', state.password) })
     }
-  }, [email, password])
+  }, [state.email, state.password])
 
   const handleSignIn = async () => {
     try {
-      if (!!validEmail || !!validPassword) {
+      if (!!state.validEmail || !!state.validPassword || state.loading) {
         return
       }
-      isLoading(true)
-      await authentication.auth({ email, password })
+      setState({ ...state, loading: true })
+      await authentication.auth({ email: state.email, password: state.password })
     } catch (error) {
       switch (error.name) {
-        case 'UserNotFoundError': isValidEmail(error.message)
+        case 'UserNotFoundError': setState({ ...state, validEmail: error.message })
           break
-        case 'InvalidPasswordError': isValidPassword(error.message)
+        case 'InvalidPasswordError': setState({ ...state, validPassword: error.message })
           break
         default: Alert.alert(error.message)
       }
     } finally {
-      isLoading(false)
+      setState({ ...state, loading: false })
     }
-  }
-
-  const handleNavigateToRegisterScreen = (): void => {
-    navigation.navigate('register')
   }
 
   return (
@@ -70,39 +65,25 @@ export function Login ({ authentication, validator }: Props) {
         <KeyboardAvoidingView behavior='padding'>
           <Input
             placeholder="E-mail"
-            messageError={validEmail}
-            onChangeText={setEmail}
+            messageError={state.validEmail}
+            onChangeText={(email) => { setState({ ...state, email }) }}
           />
 
           <Input
            placeholder="Senha"
-           messageError={validPassword}
+           messageError={state.validPassword}
            secureTextEntry
-           onChangeText={setPassword}
+           onChangeText={(password) => { setState({ ...state, password }) }}
           />
 
           <Button
             text='Entrar'
-            loading={loading}
+            loading={state.loading}
             onPress={handleSignIn}
           />
 
-          <Footer>
-            <FooterButton
-              iconColor='black'
-              iconName='person-add'
-              size={24}
-              text='Criar conta'
-              onPress={handleNavigateToRegisterScreen}
-            />
+          <Footer />
 
-            <FooterButton
-              iconColor='black'
-              iconName='email'
-              size={24}
-              text='Esqueci a senha'
-            />
-          </Footer>
         </KeyboardAvoidingView>
     </Container>
   )
