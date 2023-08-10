@@ -1,8 +1,8 @@
 import React from 'react'
 import { Container, Text } from './styles'
-import { ActivityIndicator, TouchableOpacityProps } from 'react-native'
+import { ActivityIndicator, PressableProps } from 'react-native'
 
-type Props = TouchableOpacityProps & {
+type Props = PressableProps & {
   text: string
   loading: boolean
 }
