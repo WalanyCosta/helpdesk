@@ -1,18 +1,20 @@
 import React from 'react'
-import { View } from 'react-native'
 
 import { Legend, Title } from './styles'
+import { Lottie } from '../../Animations/Lottie'
 
 type Props = {
   legend: string
   title: string
+  source: any
 }
 
-export function Header ({ legend, title }: Props) {
+export function Header ({ source, legend, title }: Props) {
   return (
-    <View >
+    <>
+       <Lottie source={source} />
        <Legend>{legend}</Legend>
        <Title>{title}</Title>
-    </View>
+    </>
   )
 }

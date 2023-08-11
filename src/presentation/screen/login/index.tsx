@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { Container } from './styles'
 import LoginAnimation from '../../assets/signin.json'
-import { Lottie } from '../../components/Animations/Lottie'
 import { Input } from '../../components/forms/Input/index'
 import { Button } from '../../components/forms/Button'
 import { Authentication } from '../../../domain/protocols/authentication'
 import { Alert, KeyboardAvoidingView } from 'react-native'
-import { Validator } from '../../protocols/validator'
+import { Validation } from '../../protocols/validation'
 import { Footer } from './components/footer/footer'
 import { Header } from '../../components/forms/header'
 
 type Props = {
   authentication: Authentication
-  validator: Validator
+  validator: Validation
 }
 
 export function Login ({ authentication, validator }: Props) {
@@ -28,17 +27,19 @@ export function Login ({ authentication, validator }: Props) {
     if (state.email !== null) {
       setState({ ...state, validEmail: validator.validate('email', state.email) })
     }
+  }, [state.email])
 
+  useEffect(() => {
     if (state.password !== null) {
       setState({ ...state, validPassword: validator.validate('password', state.password) })
     }
-  }, [state.email, state.password])
+  }, [state.password])
 
   const handleSignIn = async () => {
+    if (!!state.validEmail || !!state.validPassword || state.loading) {
+      return
+    }
     try {
-      if (!!state.validEmail || !!state.validPassword || state.loading) {
-        return
-      }
       setState({ ...state, loading: true })
       await authentication.auth({ email: state.email, password: state.password })
     } catch (error) {
@@ -56,8 +57,8 @@ export function Login ({ authentication, validator }: Props) {
 
   return (
     <Container>
-        <Lottie source={LoginAnimation} />
         <Header
+          source={LoginAnimation}
           legend='Lorem ipsum dolor sit amet. Est'
           title='Entrar'
         />
