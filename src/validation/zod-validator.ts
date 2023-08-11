@@ -1,12 +1,12 @@
 import * as z from 'zod'
-import { Validator } from '../presentation/protocols/validator'
+import { Validation } from '../presentation/protocols/validation'
 
-export class ZodValidatior implements Validator {
+export class ZodValidation implements Validation {
   private readonly validateSchema: any
 
   constructor () {
     this.validateSchema = z.object({
-      email: z.string({ required_error: 'Digite a inteligencia' })
+      email: z.string()
         .email({ message: 'Email inválido. Por favor passe email correcto.' })
         .optional(),
       password: z.string()
