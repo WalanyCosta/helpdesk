@@ -8,13 +8,15 @@ import { Alert, KeyboardAvoidingView } from 'react-native'
 import { Validation } from '../../protocols/validation'
 import { Footer } from './components/footer/footer'
 import { Header } from '../../components/forms/header'
+import { ResetPassword } from '../../../domain/protocols/reset-password'
 
 type Props = {
   authentication: Authentication
   validator: Validation
+  resetPassword: ResetPassword
 }
 
-export function Login ({ authentication, validator }: Props) {
+export function Login ({ authentication, validator, resetPassword }: Props) {
   const [state, setState] = useState({
     email: null,
     password: null,
@@ -82,7 +84,10 @@ export function Login ({ authentication, validator }: Props) {
             onPress={handleSignIn}
           />
 
-          <Footer />
+          <Footer
+            email={state.email}
+            resetPassword={resetPassword}
+          />
         </KeyboardAvoidingView>
     </Container>
   )
