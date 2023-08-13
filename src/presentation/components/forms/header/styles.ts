@@ -8,7 +8,7 @@ export const Legend = styled.Text`
     font-family: ${({ theme }) => theme.FONTS.TEXT};
 `
 export const Title = styled.Text`
-    font-size: 32px;
-    margin-bottom: 40px;
+    font-size: 30px;
+    margin-bottom: 16px;
     font-family: ${({ theme }) => theme.FONTS.TITLE};
 `

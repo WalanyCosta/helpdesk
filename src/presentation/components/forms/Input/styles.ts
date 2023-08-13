@@ -25,7 +25,7 @@ const colorBorder = (valid: string, theme: any = '') => {
 export const InputComponent = styled.TextInput<Props>`
 background: ${(props) => props.theme.COLORS.WHITE};
 color: ${(props) => props.theme.COLORS.TEXT};
-margin-bottom: 4px;
+margin-bottom: -16px;
 padding: 10px;
 border-style: solid;
 border-width: 1px;
@@ -39,4 +39,6 @@ export const MessageError = styled.Text`
   font-size: 11px;
   font-family: ${({ theme }) => theme.FONTS.TEXT};
   margin-left: 2px;
+  margin-top: 14px;
+  margin-bottom: -18px;
 `
