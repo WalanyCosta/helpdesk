@@ -7,6 +7,7 @@ import { Button } from '../../components/forms/Button'
 import { Validation } from '../../protocols/validation'
 import { AddAccount } from '../../../domain/protocols/add-account'
 import registerLogo from '../../assets/register.json'
+import { useNavigation } from '@react-navigation/native'
 
 export type Props = {
   validation: Validation
@@ -14,6 +15,7 @@ export type Props = {
 }
 
 export function Register ({ validation, addAccount }: Props) {
+  const navegation = useNavigation()
   const [validName, setValidName] = useState(null)
   const [validEmail, setValidEmail] = useState(null)
   const [validPassword, setValidPassword] = useState(null)
@@ -41,6 +43,10 @@ export function Register ({ validation, addAccount }: Props) {
       setValidPassword(validation.validate('password', state.password))
     }
   }, [state.password])
+
+  const handleBackToLogin = () => {
+    navegation.navigate('login')
+  }
 
   const handleSignUp = async () => {
     if (
@@ -97,7 +103,7 @@ export function Register ({ validation, addAccount }: Props) {
               onPress={handleSignUp}
             />
           </KeyboardAvoidingView>
-          <Footer>
+          <Footer onPress={handleBackToLogin}>
             <Icons name="arrow-back" size={24} />
             <Paragraph>Eu já tenho uma conta</Paragraph>
           </Footer>
