@@ -14,39 +14,39 @@ export type Props = {
 }
 
 export function Register ({ validation, addAccount }: Props) {
+  const [validName, setValidName] = useState(null)
+  const [validEmail, setValidEmail] = useState(null)
+  const [validPassword, setValidPassword] = useState(null)
   const [state, setState] = useState({
     name: null,
     email: null,
     password: null,
-    loading: false,
-    validName: null,
-    validEmail: null,
-    validPassword: null
+    loading: false
   })
 
   useEffect(() => {
     if (state.name !== null) {
-      setState({ ...state, validName: validation.validate('name', state.name) })
+      setValidName(validation.validate('name', state.name))
     }
   }, [state.name])
 
   useEffect(() => {
     if (state.email !== null) {
-      setState({ ...state, validEmail: validation.validate('email', state.email) })
+      setValidEmail(validation.validate('email', state.email))
     }
   }, [state.email])
 
   useEffect(() => {
     if (state.password !== null) {
-      setState({ ...state, validPassword: validation.validate('password', state.password) })
+      setValidPassword(validation.validate('password', state.password))
     }
   }, [state.password])
 
   const handleSignUp = async () => {
     if (
-      !state.name ||
-      !state.validEmail ||
-      !state.validPassword ||
+      !!validName ||
+      !!validEmail ||
+      !!validPassword ||
       state.loading
     ) {
       return
@@ -56,7 +56,7 @@ export function Register ({ validation, addAccount }: Props) {
       await addAccount.add({ name: state.name, email: state.email, password: state.password })
     } catch (error) {
       switch (error.name) {
-        case 'UserNotFoundError': setState({ ...state, validEmail: error.message })
+        case 'EmailAlreadyInUseError': setValidEmail(error.message)
           break
         default: Alert.alert(error.message)
       }
@@ -75,19 +75,19 @@ export function Register ({ validation, addAccount }: Props) {
           <KeyboardAvoidingView behavior={undefined}>
               <Input
                 placeholder="name"
-                messageError={state.validName}
+                messageError={validName}
                 onChangeText={(name) => { setState({ ...state, name }) }}
               />
 
               <Input
                 placeholder="E-mail"
-                messageError={state.validEmail}
+                messageError={validEmail}
                 onChangeText={(email) => { setState({ ...state, email }) }}
               />
 
               <Input
                 placeholder="Senha"
-                messageError={state.validPassword}
+                messageError={validPassword}
                 secureTextEntry
                 onChangeText={(password) => { setState({ ...state, password }) }}
               />

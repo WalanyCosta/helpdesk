@@ -21,6 +21,5 @@ export const Paragraph = styled.Text`
     font-size: 16px;
 `
 export const Icons = styled(MaterialIcons)`
-    font-size: 28px;
     color: ${({ theme }) => theme.COLORS.PRIMARY}
 `
