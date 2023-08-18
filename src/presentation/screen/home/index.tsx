@@ -27,9 +27,14 @@ import {
   IconID,
   StatusIcon
 } from './styles'
-import { Button } from '../../components/forms/Button'
+import { NewCall } from './component/new-call'
+import { Validation } from '../../protocols/validation'
 
-export function Home () {
+type Props = {
+  validation: Validation
+}
+
+export function Home ({ validation }: Props) {
   return (
     <Container>
         <Header>
@@ -77,49 +82,10 @@ export function Home () {
                         </Time>
                     </TimeWrapper>
                 </Call>
-
-                <Call>
-                    <HeaderCall>
-                        <TitleCall>Computador Desktop</TitleCall>
-                        <StatusIcon name="check-circle"/>
-                    </HeaderCall>
-                    <TimeWrapper>
-                        <Time>
-                            <IconTime name="schedule" />
-                            <Label>20/01/22 as 14h</Label>
-                        </Time>
-
-                        <Time>
-                            <IconID name="my-location"/>
-                            <Label>402345</Label>
-                        </Time>
-                    </TimeWrapper>
-                </Call>
-
-                <Call>
-                    <HeaderCall>
-                        <TitleCall>Computador Desktop</TitleCall>
-                        <StatusIcon name="check-circle"/>
-                    </HeaderCall>
-                    <TimeWrapper>
-                        <Time>
-                            <IconTime name="schedule" />
-                            <Label>20/01/22 as 14h</Label>
-                        </Time>
-
-                        <Time>
-                            <IconID name="my-location"/>
-                            <Label>402345</Label>
-                        </Time>
-                    </TimeWrapper>
-                </Call>
             </CallWrapper>
-
-            <Button
-                text='Novo chamado'
-                loading={false}
-            />
         </Section>
+
+        <NewCall validation={validation} />
     </Container>
   )
 }
