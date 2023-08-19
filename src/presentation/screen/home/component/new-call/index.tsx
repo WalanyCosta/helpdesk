@@ -26,11 +26,11 @@ export function NewCall ({ validation }: Props) {
 
   useEffect(() => {
     if (deviceType !== null) {
-      setValidDeviceType(deviceType)
+      setValidDeviceType(validation.validate('deviceType', deviceType))
     }
 
     if (numberDevice !== null) {
-      setValidNumberDevice(numberDevice)
+      setValidNumberDevice(validation.validate('numberDevice', numberDevice))
     }
   }, [deviceType, numberDevice])
 
