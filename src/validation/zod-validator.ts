@@ -20,6 +20,7 @@ export class ZodValidation implements Validation {
         .optional(),
       numberDevice: z.string()
         .min(8, { message: 'O campo numero de despositivo deve ter 8 digitos.' })
+        .optional()
     })
   }
 
