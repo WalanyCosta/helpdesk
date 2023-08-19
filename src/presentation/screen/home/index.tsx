@@ -29,12 +29,14 @@ import {
 } from './styles'
 import { NewCall } from './component/new-call'
 import { Validation } from '../../protocols/validation'
+import { SaveCall } from '../../../domain/protocols/save-call'
 
 type Props = {
   validation: Validation
+  saveCall: SaveCall
 }
 
-export function Home ({ validation }: Props) {
+export function Home ({ validation, saveCall }: Props) {
   return (
     <Container>
         <Header>
@@ -85,7 +87,7 @@ export function Home ({ validation }: Props) {
             </CallWrapper>
         </Section>
 
-        <NewCall validation={validation} />
+        <NewCall validation={validation} saveCall={saveCall} />
     </Container>
   )
 }
