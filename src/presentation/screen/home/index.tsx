@@ -9,12 +9,6 @@ import {
   Logout,
   Icon,
   Section,
-  Title2,
-  FilterWrapper,
-  FilterAll,
-  FilterOpen,
-  FilterFinish,
-  FilterText,
   SubTitle,
   CallWrapper,
   Call,
@@ -30,6 +24,7 @@ import {
 import { NewCall } from './component/new-call'
 import { Validation } from '../../protocols/validation'
 import { SaveCall } from '../../../domain/protocols/save-call'
+import { StatusFilter } from './component/filter-status'
 
 type Props = {
   validation: Validation
@@ -49,20 +44,7 @@ export function Home ({ validation, saveCall }: Props) {
             </Logout>
         </Header>
 
-        <Section>
-            <Title2>Filtre pelo status do chamado</Title2>
-            <FilterWrapper>
-                <FilterAll>
-                    <FilterText>Todos</FilterText>
-                </FilterAll>
-                <FilterOpen>
-                    <FilterText>Aberto</FilterText>
-                </FilterOpen>
-                <FilterFinish>
-                    <FilterText>Encerrado</FilterText>
-                </FilterFinish>
-            </FilterWrapper>
-        </Section>
+       <StatusFilter />
 
         <Section>
             <SubTitle>Meus Chamados</SubTitle>
@@ -87,7 +69,10 @@ export function Home ({ validation, saveCall }: Props) {
             </CallWrapper>
         </Section>
 
-        <NewCall validation={validation} saveCall={saveCall} />
+        <NewCall
+            validation={validation}
+            saveCall={saveCall}
+        />
     </Container>
   )
 }
