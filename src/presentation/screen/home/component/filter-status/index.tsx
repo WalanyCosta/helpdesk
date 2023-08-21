@@ -1,7 +1,6 @@
 import React from 'react'
 
 import {
-  Container,
   Title,
   FilterWrapper,
   FilterAll,
@@ -9,6 +8,8 @@ import {
   FilterFinish,
   Text
 } from './styles'
+
+import { Container } from '../../../../styles/global-style'
 
 export function StatusFilter () {
   return (

@@ -1,8 +1,5 @@
 import styled from 'styled-components/native'
 
-export const Container = styled.View`
-    margin-bottom: 32px;
-`
 export const Title = styled.Text`
     color: ${({ theme }) => theme.COLORS.TEXT};
     font-family: ${({ theme }) => theme.FONTS.TEXT};
