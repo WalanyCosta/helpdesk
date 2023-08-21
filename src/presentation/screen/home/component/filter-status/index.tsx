@@ -9,11 +9,11 @@ import {
   Text
 } from './styles'
 
-import { Container } from '../../../../styles/global-style'
+import { Section } from '../../../../styles/global-style'
 
 export function StatusFilter () {
   return (
-    <Container>
+    <Section>
         <Title>Filtre pelo status do chamado</Title>
         <FilterWrapper>
             <FilterAll>
@@ -26,6 +26,6 @@ export function StatusFilter () {
                 <Text>Encerrado</Text>
             </FilterFinish>
         </FilterWrapper>
-    </Container>
+    </Section>
   )
 }
