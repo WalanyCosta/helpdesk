@@ -57,7 +57,7 @@ export function Home ({ validation, saveCall }: Props) {
           <BottomSheetModalProvider>
               <BottomSheetModal
                   ref={bottomSheetRef}
-                  snapPoints={['85%']}
+                  snapPoints={['40%', '85%']}
                   style={{ padding: 24 }}
                   enablePanDownToClose={true}
                   backdropComponent={() => <Background />}
