@@ -11,10 +11,13 @@ import {
   IconID,
   StatusIcon
 } from './styles'
+import { TouchableOpacityProps } from 'react-native'
 
-export function Call () {
+type Props = TouchableOpacityProps
+
+export function Call ({ ...rest }: Props) {
   return (
-    <Container>
+    <Container {...rest}>
         <Header>
             <Title>Computador Desktop</Title>
             <StatusIcon name="check-circle"/>

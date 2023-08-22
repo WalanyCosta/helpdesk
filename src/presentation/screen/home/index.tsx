@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 
 import {
   Container,
@@ -14,6 +14,13 @@ import { Validation } from '../../protocols/validation'
 import { SaveCall } from '../../../domain/protocols/save-call'
 import { StatusFilter } from './component/filter-status'
 import { Calls } from './component/calls'
+import {
+  BottomSheetModal,
+  BottomSheetModalProvider,
+  BottomSheetView
+} from '@gorhom/bottom-sheet'
+import { Background } from '../../styles/global-style'
+import { Details } from './component/details'
 
 type Props = {
   validation: Validation
@@ -21,6 +28,11 @@ type Props = {
 }
 
 export function Home ({ validation, saveCall }: Props) {
+  const bottomSheetRef = useRef<BottomSheetModal>()
+
+  const handleSnapPress = (): void => {
+    bottomSheetRef.current?.present()
+  }
   return (
     <Container>
         <Header>
@@ -35,12 +47,27 @@ export function Home ({ validation, saveCall }: Props) {
 
        <StatusFilter />
 
-       <Calls />
+       <Calls press={handleSnapPress}/>
 
         <NewCall
             validation={validation}
             saveCall={saveCall}
         />
+
+          <BottomSheetModalProvider>
+              <BottomSheetModal
+                  ref={bottomSheetRef}
+                  snapPoints={['85%']}
+                  style={{ padding: 24 }}
+                  enablePanDownToClose={true}
+                  backdropComponent={() => <Background />}
+              >
+                  <BottomSheetView style={{ zIndex: 1000 }}>
+                   <Details />
+                  </BottomSheetView>
+              </BottomSheetModal>
+          </BottomSheetModalProvider>
+
     </Container>
   )
 }

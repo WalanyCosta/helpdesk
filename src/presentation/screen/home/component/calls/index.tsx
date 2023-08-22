@@ -4,17 +4,23 @@ import {
   CallWrapper
 } from './styles'
 
-import { Section } from '../../../../styles/global-style'
 import { Call } from '../call'
+import { Section } from '../../../../styles/global-style'
 
-export function Calls () {
+type Props = {
+  press: () => void
+}
+
+export function Calls ({ press }: Props) {
   return (
-    <Section>
-        <SubTitle>Meus Chamados</SubTitle>
-        <CallWrapper>
-           <Call />
-        </CallWrapper>
-    </Section>
+    <>
+      <Section>
+          <SubTitle>Meus Chamados</SubTitle>
+          <CallWrapper>
+            <Call onPress={press} />
+          </CallWrapper>
+      </Section>
 
+    </>
   )
 }
