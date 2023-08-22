@@ -4,11 +4,10 @@ import { Input } from '../../../../components/forms/Input'
 import { BottomSheetModal, BottomSheetModalProvider, BottomSheetView } from '@gorhom/bottom-sheet'
 import { KeyboardAvoidingView, Alert } from 'react-native'
 import { TextArea } from '../../../../components/forms/text-area'
-import { Title } from './styles'
 import { Validation } from '../../../../protocols/validation'
 import { SaveCall } from '../../../../../domain/protocols/save-call'
 
-import { Background } from '../../../../styles/global-style'
+import { Background, Title } from '../../../../styles/global-style'
 
 export type Props = {
   validation: Validation

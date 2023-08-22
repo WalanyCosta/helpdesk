@@ -14,3 +14,10 @@ export const Background = styled.View`
  height: ${Dimensions.get('window').height}px;
  background-color: rgba(0,0,0,0.7);
 `
+export const Title = styled.Text`
+    text-align: center;
+    font-family: ${({ theme }) => theme.FONTS.TITLE};
+    font-size: 25px;
+    margin-bottom: 24px;
+    margin-top: 16px;
+`
