@@ -12,25 +12,32 @@ import {
   StatusIcon
 } from './styles'
 import { TouchableOpacityProps } from 'react-native'
+import { CallModel } from '../../../../../domain/model/calls'
 
-type Props = TouchableOpacityProps
+type Props = TouchableOpacityProps & {
+  data: CallModel
+}
 
-export function Call ({ ...rest }: Props) {
+export function Call ({ data, ...rest }: Props) {
   return (
-    <Container {...rest}>
+    <Container status={data.status} {...rest}>
         <Header>
-            <Title>Computador Desktop</Title>
-            <StatusIcon name="check-circle"/>
+            <Title>{data.deviceType}</Title>
+            {
+              data.status === 'open'
+                ? (<StatusIcon name="check-circle" status='open'/>)
+                : (<StatusIcon name="hourglass-empty" status='close'/>)
+            }
         </Header>
         <TimeWrapper>
             <Time>
                 <IconTime name="schedule" />
-                <Label>20/01/22 as 14h</Label>
+                <Label>{data.dateStart}</Label>
             </Time>
 
             <Time>
                 <IconID name="my-location"/>
-                <Label>402345</Label>
+                <Label>{data.numberDevice}</Label>
             </Time>
         </TimeWrapper>
     </Container>

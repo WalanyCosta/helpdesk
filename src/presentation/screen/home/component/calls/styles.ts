@@ -1,6 +1,7 @@
 import styled from 'styled-components/native'
 
-export const CallWrapper = styled.View`
+export const ListCalls = styled.FlatList`
+    margin-bottom: -32px;
 `
 
 export const SubTitle = styled.Text`

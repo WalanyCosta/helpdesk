@@ -1,5 +1,4 @@
 import React, { useRef } from 'react'
-
 import {
   Container,
   Header,
@@ -13,7 +12,6 @@ import { NewCall } from './component/new-call'
 import { Validation } from '../../protocols/validation'
 import { SaveCall } from '../../../domain/protocols/save-call'
 import { StatusFilter } from './component/filter-status'
-import { Calls } from './component/calls'
 import {
   BottomSheetModal,
   BottomSheetModalProvider,
@@ -22,17 +20,22 @@ import {
 import { Background } from '../../styles/global-style'
 import { Details } from './component/details'
 
+import { LoadCalls } from './../../../domain/protocols/load-calls'
+import { Calls } from './component/calls/index'
+
 type Props = {
   validation: Validation
   saveCall: SaveCall
+  loadCalls: LoadCalls
 }
 
-export function Home ({ validation, saveCall }: Props) {
+export function Home ({ validation, saveCall, loadCalls }: Props) {
   const bottomSheetRef = useRef<BottomSheetModal>()
 
   const handleSnapPress = (): void => {
     bottomSheetRef.current?.present()
   }
+
   return (
     <Container>
         <Header>
@@ -47,7 +50,10 @@ export function Home ({ validation, saveCall }: Props) {
 
        <StatusFilter />
 
-       <Calls press={handleSnapPress}/>
+       <Calls
+          loadCalls={loadCalls}
+          handleSnapPress={handleSnapPress}
+        />
 
         <NewCall
             validation={validation}
