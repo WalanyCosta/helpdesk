@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import {
-  SubTitle,
-  ListCalls
+  Container,
+  SubTitle
 } from './styles'
 
 import { Call } from '../call'
-import { Section } from '../../../../styles/global-style'
 import { LoadCalls } from '../../../../../domain/protocols/load-calls'
 import { CallModel } from '../../../../../domain/model/calls'
+import { FlatList } from 'react-native'
 
 type Props = {
   loadCalls: LoadCalls
@@ -24,16 +24,16 @@ export function Calls ({ handleSnapPress, loadCalls }: Props) {
   }, [])
 
   return (
-    <>
-      <Section>
-          <SubTitle>Meus Chamados</SubTitle>
-          <ListCalls
-            keyExtractor={(item) => item.id}
-            data={call}
-            renderItem={({ item }) => <Call data={item} key={item.id} onPress={handleSnapPress}/>}
-          />
-      </Section>
-
-    </>
+    <Container>
+        <SubTitle>Meus Chamados</SubTitle>
+        <FlatList
+          keyExtractor={(item) => item.id}
+          data={call}
+          renderItem={({ item }) => <Call data={item} key={item.id} onPress={handleSnapPress}/>}
+          contentContainerStyle={{ paddingBottom: 100 }}
+          showsVerticalScrollIndicator={false}
+          style={{ flex: 1 }}
+        />
+    </Container>
   )
 }

@@ -24,9 +24,9 @@ export function Call ({ data, ...rest }: Props) {
         <Header>
             <Title>{data.deviceType}</Title>
             {
-              data.status === 'open'
-                ? (<StatusIcon name="check-circle" status='open'/>)
-                : (<StatusIcon name="hourglass-empty" status='close'/>)
+              data.status === 'close'
+                ? (<StatusIcon name="check-circle" status='close'/>)
+                : (<StatusIcon name="hourglass-empty" status='open'/>)
             }
         </Header>
         <TimeWrapper>

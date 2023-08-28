@@ -6,7 +6,7 @@ type Props = {
 }
 
 const getColorBasedStatus = (status, theme) => {
-  return status === 'open' ? theme.COLORS.PRIMARY : theme.COLORS.SECONDARY
+  return status === 'close' ? theme.COLORS.PRIMARY : theme.COLORS.SECONDARY
 }
 
 export const Container = styled.TouchableOpacity<Props>`

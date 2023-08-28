@@ -1,7 +1,8 @@
 import styled from 'styled-components/native'
 
-export const ListCalls = styled.FlatList`
-    margin-bottom: -32px;
+export const Container = styled.View`
+    height: 50%;
+    margin-bottom: 12px;
 `
 
 export const SubTitle = styled.Text`
