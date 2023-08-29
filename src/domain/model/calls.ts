@@ -3,6 +3,6 @@ export type CallModel = {
   deviceType: string
   numberDevice: string
   description: string
-  dateStart?: string
+  dateStart?: Date
   status?: string
 }
