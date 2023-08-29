@@ -19,6 +19,12 @@ type Props = TouchableOpacityProps & {
 }
 
 export function Call ({ data, ...rest }: Props) {
+  const getDateAndHoursFormated = (date: Date): string => {
+    const dateTimeFormat = new Intl.DateTimeFormat('en-us', { dateStyle: 'short' })
+    const dateFormated = dateTimeFormat.format(date).toString()
+    return `${dateFormated.padStart(8, '0')} às ${date.getHours()}h`
+  }
+
   return (
     <Container status={data.status} {...rest}>
         <Header>
@@ -32,7 +38,7 @@ export function Call ({ data, ...rest }: Props) {
         <TimeWrapper>
             <Time>
                 <IconTime name="schedule" />
-                <Label>{data.dateStart}</Label>
+                <Label>{getDateAndHoursFormated(data.dateStart)}</Label>
             </Time>
 
             <Time>
