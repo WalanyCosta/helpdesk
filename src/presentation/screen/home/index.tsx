@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import {
   Container,
   Header,
@@ -22,6 +22,8 @@ import { Details } from './component/details'
 
 import { LoadCalls } from './../../../domain/protocols/load-calls'
 import { Calls } from './component/calls/index'
+import { Context } from '../../context/context'
+import { CallModel } from '../../../domain/model/calls'
 
 type Props = {
   validation: Validation
@@ -31,13 +33,16 @@ type Props = {
 
 export function Home ({ validation, saveCall, loadCalls }: Props) {
   const bottomSheetRef = useRef<BottomSheetModal>()
+  const [valueDetails, setValueDetails] = useState<CallModel>()
 
-  const handleSnapPress = (): void => {
+  const handleSnapPress = (data: CallModel): void => {
+    setValueDetails(data)
     bottomSheetRef.current?.present()
   }
 
   return (
     <Container>
+       <Context.Provider value={{ valueDetails }}>
         <Header>
             <Wrapper>
                 <Title>Olá, Delcio</Title>
@@ -50,10 +55,10 @@ export function Home ({ validation, saveCall, loadCalls }: Props) {
 
        <StatusFilter />
 
-       <Calls
-          loadCalls={loadCalls}
-          handleSnapPress={handleSnapPress}
-        />
+        <Calls
+            loadCalls={loadCalls}
+            handleSnapPress={handleSnapPress}
+          />
 
         <NewCall
             validation={validation}
@@ -68,12 +73,12 @@ export function Home ({ validation, saveCall, loadCalls }: Props) {
                   enablePanDownToClose={true}
                   backdropComponent={() => <Background />}
               >
-                  <BottomSheetView style={{ zIndex: 1000 }}>
-                   <Details />
+                  <BottomSheetView>
+                    <Details />
                   </BottomSheetView>
               </BottomSheetModal>
           </BottomSheetModalProvider>
-
+          </Context.Provider>
     </Container>
   )
 }

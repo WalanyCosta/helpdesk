@@ -35,7 +35,7 @@ type DateProps = {
   color: string
 }
 export const Date = styled.Text<DateProps>`
-    width: 72px;
+    width: 80px;
     color: ${(props) => props.color};
     text-align: center;
     font-size: 13px;

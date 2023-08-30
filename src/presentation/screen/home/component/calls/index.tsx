@@ -12,12 +12,13 @@ import { Loading } from '../../../../components/Animations/loading'
 
 type Props = {
   loadCalls: LoadCalls
-  handleSnapPress: () => void
+  handleSnapPress: (data: CallModel) => void
 }
 
 export function Calls ({ handleSnapPress, loadCalls }: Props) {
   const [loading, isLoading] = useState(false)
-  const [call, setCalls] = useState<CallModel[]>([])
+
+  const [calls, setCalls] = useState<CallModel[]>([])
 
   useEffect(() => {
     isLoading(true)
@@ -29,21 +30,29 @@ export function Calls ({ handleSnapPress, loadCalls }: Props) {
   }, [])
 
   return (
-    <Container>
-        <SubTitle>Meus Chamados</SubTitle>
-        {
-          loading
-            ? <Loading />
-            : <FlatList
-              keyExtractor={(item) => item.id}
-              data={call}
-              renderItem={({ item }) => <Call data={item} key={item.id} onPress={handleSnapPress}/>}
-              contentContainerStyle={{ paddingBottom: 100 }}
-              showsVerticalScrollIndicator={false}
-              style={{ flex: 1 }}
-            />
 
-        }
-    </Container>
+      <Container>
+          <SubTitle>Meus Chamados</SubTitle>
+          {
+            loading
+              ? <Loading />
+              : <FlatList
+                  keyExtractor={(item) => item.id}
+                  data={calls}
+                  renderItem={({ item }) =>
+                  <Call
+                    data={item}
+                    key={item.id}
+                    onPress={() => { handleSnapPress(item) }}
+                  />
+                }
+                  contentContainerStyle={{ paddingBottom: 100 }}
+                  showsVerticalScrollIndicator={false}
+                  style={{ flex: 1 }}
+                />
+
+          }
+      </Container>
+
   )
 }

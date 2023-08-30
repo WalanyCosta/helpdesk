@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 import {
   IndicatorStatus,
@@ -13,10 +13,12 @@ import {
 } from './styles'
 import { Title } from '../../../../styles/global-style'
 import { useTheme } from 'styled-components/native'
+import { Context } from '../../../../context/context'
+import { getDateAndHoursFormated } from '../../../../utils/getDateAndHoursFormated'
 
 export function Details () {
   const theme = useTheme()
-
+  const { valueDetails } = useContext(Context)
   return (
     <>
          <Title>Detalhes</Title>
@@ -24,23 +26,23 @@ export function Details () {
                 <IndicatorStatus>
                     <StatusWrapper>
                         <Icon
-                        name="hourglass-empty"
-                        color={theme.COLORS.WHITE}
-                        background={theme.COLORS.SECONDARY}
+                            name="hourglass-empty"
+                            color={theme.COLORS.WHITE}
+                            background={theme.COLORS.SECONDARY}
                         />
                         <Date color={theme.COLORS.SECONDARY}>
-                            20/01/22 ás 14h
+                            {getDateAndHoursFormated(valueDetails.dateStart)}
                         </Date>
                     </StatusWrapper>
                     <Spacy/>
                     <StatusWrapper>
                         <Icon
-                        name="check"
-                        color={theme.COLORS.WHITE}
-                        background={theme.COLORS.PRIMARY}
+                            name="check"
+                            color={valueDetails.status === 'close' ? theme.COLORS.WHITE : theme.COLORS.PRIMARY}
+                            background={valueDetails.status === 'close' ? theme.COLORS.PRIMARY : theme.COLORS.BACKGROUND}
                         />
                         <Date color={theme.COLORS.PRIMARY}>
-                            20/01/22 ás 14h
+                            {getDateAndHoursFormated(valueDetails.dateStart)}
                         </Date>
                     </StatusWrapper>
                 </IndicatorStatus>
@@ -48,17 +50,17 @@ export function Details () {
                 <DetailWrapper>
                     <Detail>
                         <Span type='label'>Equipamento</Span>
-                        <Span type= 'value'>Teclado</Span>
+                        <Span type= 'value'>{valueDetails.deviceType}</Span>
                     </Detail>
 
                     <Detail>
                         <Span type='label'>Número do Património</Span>
-                        <Span type='value'>123456</Span>
+                        <Span type='value'>{valueDetails.numberDevice}</Span>
                     </Detail>
 
                     <Detail>
                         <Span type='label'>Descrição</Span>
-                        <Span type='value'>Teclado</Span>
+                        <Span type='value'>{valueDetails.description}</Span>
                     </Detail>
                 </DetailWrapper>
             </Content>
