@@ -13,18 +13,13 @@ import {
 } from './styles'
 import { TouchableOpacityProps } from 'react-native'
 import { CallModel } from '../../../../../domain/model/calls'
+import { getDateAndHoursFormated } from '../../../../utils/getDateAndHoursFormated'
 
 type Props = TouchableOpacityProps & {
   data: CallModel
 }
 
 export function Call ({ data, ...rest }: Props) {
-  const getDateAndHoursFormated = (date: Date): string => {
-    const dateTimeFormat = new Intl.DateTimeFormat('en-us', { dateStyle: 'short' })
-    const dateFormated = dateTimeFormat.format(date).toString()
-    return `${dateFormated.padStart(8, '0')} às ${date.getHours()}h`
-  }
-
   return (
     <Container status={data.status} {...rest}>
         <Header>
