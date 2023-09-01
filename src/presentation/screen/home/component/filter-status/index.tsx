@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 import {
   Title,
@@ -10,19 +10,30 @@ import {
 } from './styles'
 
 import { Section } from '../../../../styles/global-style'
+import { Context } from '../../../../context/context'
 
 export function StatusFilter () {
+  const { filter, setFilter } = useContext(Context)
   return (
     <Section>
         <Title>Filtre pelo status do chamado</Title>
         <FilterWrapper>
-            <FilterAll>
+            <FilterAll
+              opacity={filter === 'default' ? 1 : 0.7}
+              onPress={() => { setFilter('default') }}
+            >
                 <Text>Todos</Text>
             </FilterAll>
-            <FilterOpen>
+            <FilterOpen
+              opacity={filter === 'open' ? 1 : 0.7}
+              onPress={() => { setFilter('open') }}
+            >
                 <Text>Aberto</Text>
             </FilterOpen>
-            <FilterFinish>
+            <FilterFinish
+              opacity={filter === 'close' ? 1 : 0.7}
+              onPress={() => { setFilter('close') }}
+            >
                 <Text>Encerrado</Text>
             </FilterFinish>
         </FilterWrapper>

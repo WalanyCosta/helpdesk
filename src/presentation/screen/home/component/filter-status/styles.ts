@@ -14,18 +14,26 @@ export const FilterWrapper = styled.View`
     align-items: center;
     justify-content: center;
 `
-export const FilterAll = styled.View`
+
+type FilterProps = {
+  opacity: number
+}
+
+export const FilterAll = styled.TouchableOpacity<FilterProps>`
     border-radius: 8px 0px 0px 8px;
     padding: 8px 36px;
+    opacity: ${(props) => props.opacity};
     background-color: ${({ theme }) => theme.COLORS.TEXT};
 `
-export const FilterOpen = styled.View`
+export const FilterOpen = styled.TouchableOpacity<FilterProps>`
     padding: 8px 36px;
+    opacity: ${(props) => props.opacity};
     background-color: ${({ theme }) => theme.COLORS.SECONDARY};
 `
-export const FilterFinish = styled.View`
+export const FilterFinish = styled.TouchableOpacity<FilterProps>`
     border-radius: 0px 8px 8px 0px;
     padding: 8px 28px;
+    opacity: ${(props) => props.opacity};
     background-color: ${({ theme }) => theme.COLORS.PRIMARY};
 `
 export const Text = styled.Text`

@@ -34,6 +34,7 @@ type Props = {
 export function Home ({ validation, saveCall, loadCalls }: Props) {
   const bottomSheetRef = useRef<BottomSheetModal>()
   const [valueDetails, setValueDetails] = useState<CallModel>()
+  const [filter, setFilter] = useState<'close' | 'open' | 'default'>('default')
 
   const handleSnapPress = (data: CallModel): void => {
     setValueDetails(data)
@@ -42,7 +43,7 @@ export function Home ({ validation, saveCall, loadCalls }: Props) {
 
   return (
     <Container>
-       <Context.Provider value={{ valueDetails }}>
+       <Context.Provider value={{ valueDetails, filter, setFilter }}>
         <Header>
             <Wrapper>
                 <Title>Olá, Delcio</Title>
