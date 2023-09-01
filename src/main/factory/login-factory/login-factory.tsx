@@ -5,8 +5,9 @@ import { SignInWithPassword } from '../../../infra/firebase/authentication/signi
 import { ZodValidation } from '../../../validation/zod-validator'
 import { SendPasswordResetEmail } from '../../../infra/firebase/send-password-reset-email/send-password-reset-email'
 import { ResetPasswordByEmail } from '../../../domain/services/reset-password-by-email'
+import { ConnectionWithAuth } from '../../config/app'
 
-const makeSignInPassword = new SignInWithPassword()
+const makeSignInPassword = new SignInWithPassword(ConnectionWithAuth)
 const makeFirebaseAuthentication = new FirebaseAuthentication(makeSignInPassword)
 const makeZodValidation = new ZodValidation()
 const makeSendPasswordResetemail = new SendPasswordResetEmail()

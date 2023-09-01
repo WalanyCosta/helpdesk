@@ -1,10 +1,9 @@
 import { CloudSaveCallParam, CloudSaveStore } from '../../../domain/protocols/cloud-save-store'
-import { getFirestore, addDoc, collection, getDocs, where, query } from 'firebase/firestore'
-import { app } from '../config/app'
+import { addDoc, collection, getDocs, where, query, Firestore } from 'firebase/firestore'
 import { FindCallsByStatus } from '../../../domain/protocols/find-calls-by-status'
 
 export class CloudFirebaseStore implements CloudSaveStore, FindCallsByStatus {
-  private readonly connectionWithFirestore = getFirestore(app)
+  constructor (private readonly connectionWithFirestore: Firestore) {}
 
   async save (param: CloudSaveCallParam): Promise<any> {
     try {
