@@ -24,14 +24,17 @@ import { LoadCalls } from './../../../domain/protocols/load-calls'
 import { Calls } from './component/calls/index'
 import { Context } from '../../context/context'
 import { CallModel } from '../../../domain/model/calls'
+import { LogoutAccount } from '../../../domain/protocols/logout-account'
+import { Alert } from 'react-native'
 
 type Props = {
   validation: Validation
   saveCall: SaveCall
   loadCalls: LoadCalls
+  logoutAccount: LogoutAccount
 }
 
-export function Home ({ validation, saveCall, loadCalls }: Props) {
+export function Home (param: Props) {
   const bottomSheetRef = useRef<BottomSheetModal>()
   const [valueDetails, setValueDetails] = useState<CallModel>()
   const [filter, setFilter] = useState<'close' | 'open' | 'default'>('default')
@@ -39,6 +42,14 @@ export function Home ({ validation, saveCall, loadCalls }: Props) {
   const handleSnapPress = (data: CallModel): void => {
     setValueDetails(data)
     bottomSheetRef.current?.present()
+  }
+
+  const handleLogout = async (): Promise<void> => {
+    try {
+      await param.logoutAccount.logout()
+    } catch (error) {
+      Alert.alert('Error', error.message)
+    }
   }
 
   return (
@@ -49,7 +60,7 @@ export function Home ({ validation, saveCall, loadCalls }: Props) {
                 <Title>Olá, Delcio</Title>
                 <Paragraph>Conte Conosco, estamos aqui para ajudar</Paragraph>
             </Wrapper>
-            <Logout>
+            <Logout onPress={handleLogout}>
                 <Icon name="exit-outline"/>
             </Logout>
         </Header>
@@ -57,13 +68,13 @@ export function Home ({ validation, saveCall, loadCalls }: Props) {
        <StatusFilter />
 
         <Calls
-            loadCalls={loadCalls}
+            loadCalls={param.loadCalls}
             handleSnapPress={handleSnapPress}
           />
 
         <NewCall
-            validation={validation}
-            saveCall={saveCall}
+            validation={param.validation}
+            saveCall={param.saveCall}
         />
 
           <BottomSheetModalProvider>
