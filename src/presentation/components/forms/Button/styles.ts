@@ -7,6 +7,7 @@ export const Container = styled.Pressable`
     border-radius: 12px;
     align-items: center;
     justify-content: center;
+    margin-top: 24px;
 `
 export const Text = styled.Text`
     color: ${({ theme }) => theme.COLORS.WHITE};

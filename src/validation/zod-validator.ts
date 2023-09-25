@@ -6,6 +6,9 @@ export class ZodValidation implements Validation {
 
   constructor () {
     this.validateSchema = z.object({
+      name: z.string()
+        .min(1, { message: 'campo vazio. Por favor preencha com seu nome' })
+        .optional(),
       email: z.string()
         .email({ message: 'Email inválido. Por favor passe email correcto.' })
         .optional(),
