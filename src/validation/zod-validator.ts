@@ -7,13 +7,19 @@ export class ZodValidation implements Validation {
   constructor () {
     this.validateSchema = z.object({
       name: z.string()
-        .min(1, { message: 'campo vazio. Por favor preencha com seu nome' })
+        .min(1, { message: 'Campo vazio. Preencha com seu nome' })
         .optional(),
       email: z.string()
-        .email({ message: 'Email inválido. Por favor passe email correcto.' })
+        .email({ message: 'Email inválido. Passe email correcto.' })
         .optional(),
       password: z.string()
         .min(6, { message: 'A senha deve ter conter pelomenos 6 caracteres.' })
+        .optional(),
+      deviceType: z.string()
+        .min(1, { message: 'Campo Vazio. Preencha com tipo disposito com problema' })
+        .optional(),
+      numberDevice: z.string()
+        .min(8, { message: 'O campo numero de despositivo deve ter 8 digitos.' })
         .optional()
     })
   }
